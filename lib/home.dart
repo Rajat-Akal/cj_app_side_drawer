@@ -41,7 +41,9 @@ class Navigation_Drawer extends StatelessWidget {
             IconButton(
               padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
               icon: Icon(Icons.close),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               iconSize: 30,
             ),
             buildHeader(context),
@@ -170,17 +172,7 @@ Widget buildMenuItems(BuildContext context) {
       ),
       child: Column(
         children: [
-          ListTile(
-            visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-            leading:
-                ImageIcon(AssetImage("assets/icons/side_bar_settings.png")),
-            title: Text(
-              "Account Settings",
-              style: TextStyle(
-                color: Color(0xff686868),
-              ),
-            ),
-          ),
+          menuItems("Account Settings", "assets/icons/side_bar_settings.png"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13),
             child: Divider(
@@ -188,16 +180,7 @@ Widget buildMenuItems(BuildContext context) {
               thickness: 1,
             ),
           ),
-          ListTile(
-            visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-            leading: ImageIcon(AssetImage("assets/icons/side_bar_chat.png")),
-            title: Text(
-              "Chat with CJ Mitra",
-              style: TextStyle(
-                color: Color(0xff686868),
-              ),
-            ),
-          ),
+          menuItems("Chat with CJ Mitra", "assets/icons/side_bar_chat.png"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13),
             child: Divider(
@@ -205,17 +188,7 @@ Widget buildMenuItems(BuildContext context) {
               thickness: 1,
             ),
           ),
-          ListTile(
-            visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-            leading:
-                ImageIcon(AssetImage("assets/icons/side_bar_refer_friend.png")),
-            title: Text(
-              "Refer a Friend",
-              style: TextStyle(
-                color: Color(0xff686868),
-              ),
-            ),
-          ),
+          menuItems("Refer a Friend", "assets/icons/side_bar_refer_friend.png"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13),
             child: Divider(
@@ -223,17 +196,7 @@ Widget buildMenuItems(BuildContext context) {
               thickness: 1,
             ),
           ),
-          ListTile(
-            visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-            leading:
-                ImageIcon(AssetImage("assets/icons/side_bar_terms_use.png")),
-            title: Text(
-              "Terms of Use",
-              style: TextStyle(
-                color: Color(0xff686868),
-              ),
-            ),
-          ),
+          menuItems("Terms of Use", "assets/icons/side_bar_terms_use.png"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13),
             child: Divider(
@@ -241,17 +204,8 @@ Widget buildMenuItems(BuildContext context) {
               thickness: 1,
             ),
           ),
-          ListTile(
-            visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-            leading: ImageIcon(
-                AssetImage("assets/icons/sidebar_privacy_policy.png")),
-            title: Text(
-              "Privacy Policy",
-              style: TextStyle(
-                color: Color(0xff686868),
-              ),
-            ),
-          ),
+          menuItems(
+              "Privacy Policy", "assets/icons/sidebar_privacy_policy.png"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13),
             child: Divider(
@@ -259,17 +213,21 @@ Widget buildMenuItems(BuildContext context) {
               thickness: 1,
             ),
           ),
-          ListTile(
-            visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-            leading: ImageIcon(AssetImage("assets/icons/side_bar_version.png")),
-            title: Text(
-              "Version",
-              style: TextStyle(
-                color: Color(0xff686868),
-              ),
-            ),
-          ),
+          menuItems("Version", "assets/icons/side_bar_version.png")
         ],
+      ),
+    ),
+  );
+}
+
+ListTile menuItems(String title, String image) {
+  return ListTile(
+    visualDensity: VisualDensity(horizontal: 0, vertical: -2),
+    leading: ImageIcon(AssetImage(image)),
+    title: Text(
+      title,
+      style: TextStyle(
+        color: Color(0xff686868),
       ),
     ),
   );
