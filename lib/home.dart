@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_home_page_drawer/constants/Constants.dart';
 import 'package:flutter_home_page_drawer/main.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,16 +13,65 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedindex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text("screen 1"),
+    Text("screen 2"),
+    Text("Screen 3"),
+    Text("Screen 4"),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedindex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Side Drawer"),
-          centerTitle: true,
-        ),
+        appBar: _selectedindex == 0
+            ? AppBar(
+                title: Text("Side Drawer"),
+                centerTitle: true,
+              )
+            : null,
         drawer: Navigation_Drawer(),
-        body: Text("side Drawer"),
+        body: _widgetOptions.elementAt(_selectedindex),
+        bottomNavigationBar: BottomNavigationBar(
+          // iconSize: 10.0,
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage("assets/icons/bottom_nav_home.png")),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon:
+                  ImageIcon(AssetImage("assets/icons/bottom_nav_employer.png")),
+              label: "Employer",
+            ),
+            BottomNavigationBarItem(
+              icon:
+                  ImageIcon(AssetImage("assets/icons/bottom_nav_earnings.png")),
+              label: "Earnings",
+            ),
+            BottomNavigationBarItem(
+              icon:
+                  ImageIcon(AssetImage("assets/icons/bottom_nav_profile.png")),
+              label: "Profile",
+            ),
+          ],
+          currentIndex: _selectedindex,
+          // fixedColor: Colors.grey,
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
@@ -64,7 +115,7 @@ Widget buildHeader(BuildContext context) {
     child: Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.grey),
+        side: BorderSide(color: ProjectConstants.darkGreyColor),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -77,12 +128,32 @@ Widget buildHeader(BuildContext context) {
             radius: 35,
             backgroundImage:
                 AssetImage("assets/images/profile-pic_side_drawer.png"),
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Colors.white,
+                    child: ImageIcon(
+                      AssetImage("assets/icons/side_bar_camera.png"),
+                      color: ProjectConstants.darkGreyColor,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           ListTile(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Kamla Devi"),
+                Text(
+                  "Kamla Devi",
+                  style: TextStyle(
+                    fontFamily: ProjectConstants.viewHeadingFontfamily,
+                  ),
+                ),
                 SizedBox(width: 5),
                 ImageIcon(
                   AssetImage("assets/icons/tick_icon.png"),
@@ -93,15 +164,28 @@ Widget buildHeader(BuildContext context) {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("House Help"),
+                Text(
+                  "House Help",
+                  style: TextStyle(
+                    fontFamily: ProjectConstants.viewHeadingFontfamily,
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Cj Code: ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: ProjectConstants.viewHeadingFontfamily,
+                      ),
                     ),
-                    Text("688578"),
+                    Text(
+                      "688578",
+                      style: TextStyle(
+                        fontFamily: ProjectConstants.viewHeadingFontfamily,
+                      ),
+                    ),
                   ],
                 ),
                 Row(
@@ -109,9 +193,17 @@ Widget buildHeader(BuildContext context) {
                   children: [
                     Text(
                       "Mob: ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: ProjectConstants.viewHeadingFontfamily,
+                      ),
                     ),
-                    Text("9875836528"),
+                    Text(
+                      "9875836528",
+                      style: TextStyle(
+                        fontFamily: ProjectConstants.viewHeadingFontfamily,
+                      ),
+                    ),
                   ],
                 ),
                 Row(
@@ -119,9 +211,17 @@ Widget buildHeader(BuildContext context) {
                   children: [
                     Text(
                       "Email: ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: ProjectConstants.viewHeadingFontfamily,
+                      ),
                     ),
-                    Text("kamla@gmail.com"),
+                    Text(
+                      "kamla@gmail.com",
+                      style: TextStyle(
+                        fontFamily: ProjectConstants.viewHeadingFontfamily,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -144,7 +244,12 @@ Widget buildHeader(BuildContext context) {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Share QR code"),
+                Text(
+                  "Share QR code",
+                  style: TextStyle(
+                    fontFamily: ProjectConstants.viewHeadingFontfamily,
+                  ),
+                ),
                 SizedBox(
                   width: 5,
                 ),
@@ -167,7 +272,7 @@ Widget buildMenuItems(BuildContext context) {
     child: Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.grey),
+        side: BorderSide(color: ProjectConstants.darkGreyColor),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -223,11 +328,15 @@ Widget buildMenuItems(BuildContext context) {
 ListTile menuItems(String title, String image) {
   return ListTile(
     visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-    leading: ImageIcon(AssetImage(image)),
+    leading: ImageIcon(
+      AssetImage(image),
+      color: ProjectConstants.darkGreyColor,
+    ),
     title: Text(
       title,
       style: TextStyle(
-        color: Color(0xff686868),
+        color: ProjectConstants.darkGreyColor,
+        fontFamily: ProjectConstants.viewHeadingFontfamily,
       ),
     ),
   );
